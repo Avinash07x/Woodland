@@ -10,23 +10,13 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      {/* ✅ 3D Tubes Background */}
       <TubesCursor />
-
-      {/* ✅ Main Layout */}
       <div className="relative min-h-screen flex flex-col z-10">
-        
-        {/* ✅ Navbar */}
-        
-
-        {/* ✅ Page Content */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
         </main>
-
-        {/* ✅ Footer */}
         <Footer />
       </div>
     </Router>

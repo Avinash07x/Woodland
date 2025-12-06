@@ -1,6 +1,7 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import about from "../assets/project2.jpeg";
 
 function About() {
   return (
@@ -15,13 +16,13 @@ function About() {
           viewport={{ once: true }}
         >
           <h3 className="text-4xl font-extrabold text-white mb-6">
-            About Woodland
+            About
           </h3>
 
           <p className="mt-4 text-gray-600 leading-relaxed">
-            Woodland is a practice that values material honesty, context-sensitive
-            design and thoughtful detailing. Our collaborative process ensures
-            each project is unique to its people and place.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.
+
+Ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
           </p>
 
           {/* ✅ Feature List */}
@@ -50,7 +51,7 @@ function About() {
           className="rounded-2xl overflow-hidden shadow-xl"
         >
           <img
-            src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=1200&q=60"
+            src={about}
             alt="Woodland Studio"
             className="w-full h-[360px] object-cover hover:scale-105 transition-transform duration-500"
           />

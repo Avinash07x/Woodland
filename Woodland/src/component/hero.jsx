@@ -186,7 +186,7 @@ const Hero = () => {
   return (
     <>
       {/* HERO SLIDES */}
-      <div ref={containerRef} className="relative w-full h-screen">
+      <div projects ref={containerRef}  className="relative w-full h-screen">
         {slides.map((slide, i) => (
           <section
             key={i}

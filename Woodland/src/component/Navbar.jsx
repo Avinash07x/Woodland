@@ -1,26 +1,45 @@
-import React from 'react'
-import { Menu, X, } from 'lucide-react'
+import React from "react";
+import { Menu, X } from "lucide-react";
 
 function Navbar() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
+
   return (
-    <header className="fixed w-full z-30 mt-0 bg-white/60 backdrop-blur-md">
+    <header className="fixed w-full z-30 bg-white/60 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="font-bold text-xl tracking-tight">WOODLAND<span className="text-green-600">.</span></div>
+        
+        {/* ✅ LOGO */}
+        <div
+          className=" text-xl font-bold tracking-tight text-black"
+        >
+          WOODLAND<span className="text-green-600">.</span>
+        </div>
+
+        {/* ✅ DESKTOP MENU */}
         <nav className="hidden md:flex gap-8 items-center">
-          <a href="#home" className="hover:text-green-600">Home</a>
-          <a href="#projects" className="hover:text-green-600">Projects</a>
-          <a href="#services" className="hover:text-green-600">Services</a>
-          <a href="#about" className="hover:text-green-600">About</a>
-          <a href="#contact" className="px-4 py-2 rounded-md border border-gray-200 hover:bg-green-50">Contact</a>
+          <a href="#home" className="hover:glitch hover:text-green-600 transition">Home</a>
+          <a href="#projects" className="hover:glitch hover:text-green-600 transition">Projects</a>
+          <a href="#services" className="hover:glitch hover:text-green-600 transition">Services</a>
+          <a href="#about" className="hover:glitch hover:text-green-600 transition">About</a>
+          <a
+            href="#contact"
+            className="hover:glitch px-4 py-2 rounded-md border border-gray-200 hover:bg-green-50 transition"
+          >
+            Contact
+          </a>
         </nav>
 
-        <button className="md:hidden p-2" onClick={() => setOpen(v => !v)} aria-label="menu">
+        {/* ✅ MOBILE BUTTON */}
+        <button
+          className="md:hidden p-2"
+          onClick={() => setOpen(v => !v)}
+          aria-label="menu"
+        >
           {open ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* ✅ MOBILE MENU */}
       {open && (
         <div className="md:hidden bg-white shadow-md">
           <div className="px-6 py-6 flex flex-col gap-4">
@@ -33,6 +52,7 @@ function Navbar() {
         </div>
       )}
     </header>
-  )
-};
+  );
+}
+
 export default Navbar;

@@ -90,7 +90,7 @@ const Carousel3D = () => {
   }, [imagesCount]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
       <div
         ref={carouselRef}
         className="relative w-full h-full flex justify-center items-center cursor-grab select-none perspective-[1000px]"
