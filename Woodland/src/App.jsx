@@ -1,30 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import Home from "./page/Home";
-import TubesCursor from "./component/TubesCursor"; // ✅ Import here
+import TubesCursor from "./component/TubesCursor";
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className="relative min-h-screen flex flex-col">
-        <div className="relative z-20 flex flex-col min-h-screen">
+      {/* ✅ 3D Tubes Background */}
+      <TubesCursor />
 
+      {/* ✅ Main Layout */}
+      <div className="relative min-h-screen flex flex-col z-10">
+        
+        {/* ✅ Navbar */}
+        
 
+        {/* ✅ Page Content */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </main>
 
-          <TubesCursor />
-
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </main>
-
-          <Footer />
-        </div>
-
+        {/* ✅ Footer */}
+        <Footer />
       </div>
     </Router>
   );

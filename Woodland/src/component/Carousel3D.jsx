@@ -7,8 +7,9 @@ gsap.registerPlugin(Observer);
 const Carousel3D = () => {
   const carouselRef = useRef(null);
   const imagesRef = useRef([]);
-  const radius = 242;
   const progress = useRef({ value: 0 });
+
+  const radius = 300;
 
   const images = [
     "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
@@ -27,12 +28,12 @@ const Carousel3D = () => {
     const carousel = carouselRef.current;
     const imgs = imagesRef.current;
 
-    if (!carousel) return;
+    if (!carousel || !imgs.length) return;
 
-    // ✅ AUTO ROTATION (Infinite Loop)
+    // ✅ AUTO ROTATION (INFINITE)
     const autoRotate = gsap.to(progress.current, {
       value: 1,
-      duration: 20,
+      duration: 25,
       repeat: -1,
       ease: "linear",
     });
@@ -40,31 +41,31 @@ const Carousel3D = () => {
     // ✅ USER CONTROL
     const observer = Observer.create({
       target: carousel,
-      type: "wheel,pointer",
+      type: "wheel,pointer,touch",
+      preventDefault: true,
       onPress: () => {
         carousel.style.cursor = "grabbing";
-        autoRotate.pause(); // user touch kare to auto stop
+        autoRotate.pause();
       },
       onRelease: () => {
         carousel.style.cursor = "grab";
-        autoRotate.resume(); // chhodte hi auto resume
+        autoRotate.resume();
       },
       onChange: (self) => {
-        gsap.killTweensOf(progress.current);
         const delta =
           self.event.type === "wheel"
             ? self.deltaY * -0.0005
-            : self.deltaX * 0.05;
+            : self.deltaX * 0.0005;
 
         gsap.to(progress.current, {
           value: `+=${delta}`,
-          duration: 1,
+          duration: 0.6,
           ease: "power3.out",
         });
       },
     });
 
-    // ✅ POSITION UPDATE LOOP
+    // ✅ ANIMATION LOOP
     const animate = () => {
       imgs.forEach((img, idx) => {
         const theta = idx / imagesCount - progress.current.value;
@@ -89,25 +90,28 @@ const Carousel3D = () => {
   }, [imagesCount]);
 
   return (
-    <div
-      ref={carouselRef}
-      className="w-full h-screen relative flex justify-center items-center select-none cursor-grab perspective-[800px]"
-      style={{ transform: "rotateX(-18deg) translateY(-60px)" }}
-    >
-      {images.map((src, i) => (
-        <div
-          key={i}
-          ref={(el) => (imagesRef.current[i] = el)}
-          className="absolute w-[800px] h-[400px] flex justify-center items-center origin-center"
-        >
-          <img
-            src={src}
-            alt={`slide-${i}`}
-            className="w-full h-full object-cover rounded-xl shadow-2xl"
-          />
-        </div>
-      ))}
-    </div>
+    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
+      <div
+        ref={carouselRef}
+        className="relative w-full h-full flex justify-center items-center cursor-grab select-none perspective-[1000px]"
+        style={{ transform: "rotateX(-15deg) translateY(-40px)" }}
+      >
+        {images.map((src, i) => (
+          <div
+            key={i}
+            ref={(el) => (imagesRef.current[i] = el)}
+            className="absolute w-[700px] h-[380px] md:w-[800px] md:h-[420px] flex justify-center items-center"
+          >
+            <img
+              src={src}
+              alt={`slide-${i}`}
+              draggable={false}
+              className="w-full h-full object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

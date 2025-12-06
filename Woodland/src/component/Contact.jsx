@@ -3,10 +3,10 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 
 function Contact() {
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20">
       <div className="max-w-4xl mx-auto px-6">
-        <h3 className="text-3xl font-bold">Get in touch</h3>
-        <p className="mt-2 text-gray-600">For enquiries, fees or collaborations, drop us a message.</p>
+        <h3 className="text-3xl text-blue-600 font-bold">Get in touch</h3>
+        <p className="mt-2 text-white">For enquiries, fees or collaborations, drop us a message.</p>
 
         <div className="mt-8 grid md:grid-cols-2 gap-6">
           <form className="space-y-4">
@@ -21,7 +21,7 @@ function Contact() {
               <MapPin />
               <div>
                 <div className="font-semibold">Office</div>
-                <div className="text-gray-600">123 Woodland Lane, City</div>
+                <div className="text-white">123 Woodland Lane, City</div>
               </div>
             </div>
 
@@ -29,7 +29,7 @@ function Contact() {
               <Phone />
               <div>
                 <div className="font-semibold">Phone</div>
-                <div className="text-gray-600">+1 555 123 4567</div>
+                <div className="text-white">+1 555 123 4567</div>
               </div>
             </div>
 
@@ -37,11 +37,11 @@ function Contact() {
               <Mail />
               <div>
                 <div className="font-semibold">Email</div>
-                <div className="text-gray-600">hello@woodland.example</div>
+                <div className="text-white">hello@woodland.example</div>
               </div>
             </div>
 
-            <div className="mt-6 text-sm text-gray-500">We typically reply within 2 business days.</div>
+            <div className="mt-6 text-sm text-white">We typically reply within 2 business days.</div>
           </div>
         </div>
       </div>
