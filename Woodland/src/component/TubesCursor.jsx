@@ -8,20 +8,20 @@ gsap.registerPlugin(Observer, TextPlugin);
 
 const slides = [
   {
-    title: "SCROLL",
-    img: "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea",
+    title: "Coastal Villa",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600",
   },
   {
-    title: "SWIPE",
-    img: "https://images.unsplash.com/photo-1558603668-6570496b66f8",
+    title: "The Willow Loft",
+    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600",
   },
   {
-    title: "SCROLL",
-    img: "https://images.unsplash.com/photo-1537165924986-cc3568f5d454",
+    title: "Sunshine Retreat",
+    img: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=1600",
   },
   {
-    title: "SWIPE",
-    img: "https://images.unsplash.com/photo-1589271243958-d61e12b61b97",
+    title: "Forest Pavilion",
+    img: "https://images.unsplash.com/photo-1599423300746-b62533397364?w=1600",
   },
 ];
 
@@ -287,7 +287,7 @@ export default function TubesCursor() {
             <div className="slide__outer w-full h-full overflow-hidden">
               <div className="slide__inner w-full h-full overflow-hidden">
                 <div className="flex items-center justify-center h-full relative">
-                  <h2 className="slide__heading text-white font-extrabold text-[clamp(5rem,15vw,15rem)] z-10">
+                  <h2 className="slide__heading text-white font-extrabold text-[clamp(1rem,5vw,5rem)] z-10">
                     {slide.title}
                   </h2>
                   <img
