@@ -59,64 +59,72 @@ const services = [
 
 function Services() {
   return (
-    <section id="services" className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      id="services"
+      className="relative z-10 py-28"
+    >
+      {/* Background overlay for Tubes */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
         
-        {/* ✅ Section Heading */}
+        {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-5xl font-bold mb-20"
+          className="text-5xl font-extrabold text-white mb-24"
         >
           SERVICES
         </motion.h2>
 
-        {/* ✅ Services Rows */}
-        <div className="space-y-28">
+        {/* Services Rows */}
+        <div className="space-y-32">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true }}
-              className={`flex flex-col md:flex-row items-center gap-16 ${
+              className={`flex flex-col md:flex-row items-center gap-20 ${
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* ✅ Left Content */}
+              {/* LEFT CONTENT */}
               <div className="md:w-1/2">
-                <span className="text-sm text-green-600 font-semibold">
+                <span className="text-sm text-emerald-400 font-semibold">
                   {service.id}
                 </span>
 
-                <h3 className="text-3xl text-blue-500 font-bold mt-2 mb-4">
+                <h3 className="text-3xl font-bold text-white mt-3 mb-4">
                   {service.title}
                 </h3>
 
-                <p className="text-white mb-6 leading-relaxed max-w-xl">
+                <p className="text-gray-300 mb-6 leading-relaxed max-w-xl">
                   {service.desc}
                 </p>
 
-                <ul className="space-y-2 text-sm text-white list-disc pl-5">
+                <ul className="space-y-2 text-sm text-gray-200 list-disc pl-5">
                   {service.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
               </div>
 
-              {/* ✅ Right Image */}
-              <div className="md:w-1/2">
-                <motion.img
-                  whileHover={{ scale: 1.04 }}
-                  transition={{ duration: 0.4 }}
+              {/* RIGHT IMAGE */}
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.4 }}
+                className="md:w-1/2 rounded-2xl overflow-hidden shadow-2xl"
+              >
+                <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-[420px] object-cover rounded-xl shadow-lg"
+                  className="w-full h-[420px] object-cover"
                 />
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

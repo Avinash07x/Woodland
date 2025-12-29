@@ -37,41 +37,49 @@ const projects = [
 
 function Projects() {
   return (
-    <>
-      <section id="projects" className="w-full">
-        {projects.map((project, index) => (
+    <section
+      id="projects"
+      className="relative z-10 w-full"
+    >
+      {projects.map((project, index) => (
+        <div
+          key={index}
+          className="relative w-full h-[90vh] flex items-center overflow-hidden"
+        >
+          {/* Background Image */}
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover scale-105"
+          />
+
+          {/* Dark overlay for Tubes contrast */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Glass Card */}
           <div
-            key={index}
-            className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden mb-20" // added mb-20 for gap
+            className={`relative max-w-md p-10 backdrop-blur-xl bg-black/50 text-white shadow-2xl ${
+              project.align === "left"
+                ? "ml-6 md:ml-16"
+                : "mr-6 md:mr-16 ml-auto"
+            }`}
           >
-            {/* ✅ Background Image */}
-            <img
-              src={project.image}
-              alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            <h2 className="text-2xl font-semibold mb-2">
+              {project.title}
+            </h2>
 
-            {/* ✅ Overlay Card */}
-            <div
-              className={`absolute ${project.align === "left" ? "left-12" : "right-12"
-                } max-w-md bg-white/80 backdrop-blur-xl p-10 shadow-2xl`}
-            >
-              <h2 className="text-2xl font-semibold mb-2">
-                {project.title}
-              </h2>
+            <p className="text-sm text-gray-300 mb-4">
+              {project.meta}
+            </p>
 
-              <p className="text-sm text-gray-600 mb-4">
-                {project.meta}
-              </p>
-
-              <p className="text-gray-700 leading-relaxed">
-                {project.desc}
-              </p>
-            </div>
+            <p className="text-gray-200 leading-relaxed">
+              {project.desc}
+            </p>
           </div>
-        ))}
-      </section>
-    </>
+        </div>
+      ))}
+    </section>
   );
 }
+
 export default Projects;

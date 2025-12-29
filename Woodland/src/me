@@ -1,0 +1,1385 @@
+// import React, { useState, useEffect } from 'react';
+// import { Menu, X, ShoppingCart, Star, Phone, Mail, MapPin, Clock, Award, Users, TrendingUp, Send } from 'lucide-react';
+
+// const NamkeenWebsite = () => {
+//   const [scrollY, setScrollY] = useState(0);
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [activeSection, setActiveSection] = useState('home');
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrollY(window.scrollY);
+      
+//       // Active section detection
+//       const sections = ['home', 'products', 'about', 'contact'];
+//       const current = sections.find(section => {
+//         const element = document.getElementById(section);
+//         if (element) {
+//           const rect = element.getBoundingClientRect();
+//           return rect.top <= 100 && rect.bottom >= 100;
+//         }
+//         return false;
+//       });
+//       if (current) setActiveSection(current);
+//     };
+    
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const products = [
+//     { 
+//       name: 'Aloo Bhujia', 
+//       price: '₹120', 
+//       rating: 4.5, 
+//       image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=300&fit=crop',
+//       desc: 'Crispy potato sticks'
+//     },
+//     { 
+//       name: 'Moong Dal', 
+//       price: '₹100', 
+//       rating: 4.8, 
+//       image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop',
+//       desc: 'Crunchy lentil snack'
+//     },
+//     { 
+//       name: 'Sev Mixture', 
+//       price: '₹90', 
+//       rating: 4.3, 
+//       image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop',
+//       desc: 'Spicy mixed namkeen'
+//     },
+//     { 
+//       name: 'Chakli', 
+//       price: '₹110', 
+//       rating: 4.6, 
+//       image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop',
+//       desc: 'Spiral shaped delight'
+//     },
+//     { 
+//       name: 'Namak Para', 
+//       price: '₹80', 
+//       rating: 4.4, 
+//       image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=300&fit=crop',
+//       desc: 'Diamond cut savory'
+//     },
+//     { 
+//       name: 'Khatta Meetha', 
+//       price: '₹130', 
+//       rating: 4.7, 
+//       image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop',
+//       desc: 'Sweet & tangy mix'
+//     }
+//   ];
+
+//   const features = [
+//     { icon: <Clock className="w-12 h-12" />, title: '50+ Years', desc: 'Of Tradition' },
+//     { icon: <Award className="w-12 h-12" />, title: '100% Natural', desc: 'No Preservatives' },
+//     { icon: <Users className="w-12 h-12" />, title: '10K+ Customers', desc: 'Happy & Satisfied' },
+//     { icon: <TrendingUp className="w-12 h-12" />, title: 'Fresh Daily', desc: 'Made Fresh' }
+//   ];
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 overflow-x-hidden">
+//       {/* Navigation */}
+//       <nav className="fixed w-full z-50 transition-all duration-500" 
+//            style={{
+//              backgroundColor: scrollY > 50 ? 'rgba(194, 65, 12, 0.98)' : 'transparent',
+//              backdropFilter: scrollY > 50 ? 'blur(20px)' : 'none',
+//              boxShadow: scrollY > 50 ? '0 10px 30px rgba(0,0,0,0.3)' : 'none'
+//            }}>
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           <div className="flex justify-between items-center py-4">
+//             <div className="flex items-center space-x-3">
+//               <div className="text-3xl sm:text-4xl animate-bounce">🥨</div>
+//               <div className="text-2xl sm:text-3xl font-bold text-white" 
+//                    style={{ transform: `scale(${1 + scrollY * 0.0002})` }}>
+//                 Desi Namkeen
+//               </div>
+//             </div>
+            
+//             {/* Desktop Menu */}
+//             <div className="hidden md:flex space-x-8 text-white font-semibold">
+//               {['home', 'products', 'about', 'contact'].map(section => (
+//                 <a 
+//                   key={section}
+//                   href={`#${section}`} 
+//                   className={`capitalize hover:text-yellow-300 transition-all duration-300 relative ${activeSection === section ? 'text-yellow-300' : ''}`}
+//                 >
+//                   {section}
+//                   {activeSection === section && (
+//                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-yellow-300"></span>
+//                   )}
+//                 </a>
+//               ))}
+//             </div>
+
+//             <div className="flex items-center space-x-4">
+//               <div className="relative group">
+//                 <ShoppingCart className="text-white cursor-pointer hover:text-yellow-300 transition-all duration-300 transform group-hover:scale-110" />
+//                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+//                   3
+//                 </span>
+//               </div>
+//               <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+//                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+//               </button>
+//             </div>
+//           </div>
+
+//           {/* Mobile Menu */}
+//           {isMenuOpen && (
+//             <div className="md:hidden pb-4 space-y-2 animate-fadeIn">
+//               {['home', 'products', 'about', 'contact'].map(section => (
+//                 <a 
+//                   key={section}
+//                   href={`#${section}`} 
+//                   className="block text-white hover:text-yellow-300 py-2 capitalize transition-colors"
+//                   onClick={() => setIsMenuOpen(false)}
+//                 >
+//                   {section}
+//                 </a>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       </nav>
+
+//       {/* Hero Section with Advanced Parallax */}
+//       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+//         {/* Animated Background Layers */}
+//         <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-red-600 to-yellow-600"
+//              style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
+//         </div>
+
+//         {/* Animated Pattern Overlay */}
+//         <div className="absolute inset-0 opacity-20"
+//              style={{ 
+//                backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+//                backgroundSize: '50px 50px',
+//                transform: `translate(${scrollY * 0.1}px, ${scrollY * 0.2}px)`
+//              }}>
+//         </div>
+
+//         {/* Floating Food Elements with Different Speeds */}
+//         <div className="absolute inset-0 pointer-events-none">
+//           <div className="text-8xl absolute top-20 left-10 opacity-30 animate-float"
+//                style={{ transform: `translate(${scrollY * 0.3}px, ${scrollY * 0.2}px) rotate(${scrollY * 0.1}deg)` }}>
+//             🥨
+//           </div>
+//           <div className="text-7xl absolute top-40 right-32 opacity-25 animate-float-delayed"
+//                style={{ transform: `translate(${-scrollY * 0.25}px, ${scrollY * 0.15}px)` }}>
+//             🌶️
+//           </div>
+//           <div className="text-9xl absolute bottom-40 right-20 opacity-20 animate-spin-slow"
+//                style={{ transform: `translate(${-scrollY * 0.2}px, ${scrollY * 0.3}px)` }}>
+//             🥔
+//           </div>
+//           <div className="text-6xl absolute bottom-20 left-32 opacity-30 animate-bounce-slow"
+//                style={{ transform: `translateY(${scrollY * 0.25}px)` }}>
+//             🌾
+//           </div>
+//         </div>
+
+//         {/* Hero Content with Fade Effect */}
+//         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto"
+//              style={{ 
+//                transform: `translateY(${scrollY * 0.3}px)`, 
+//                opacity: Math.max(0, 1 - scrollY * 0.003)
+//              }}>
+//           <div className="animate-slideDown">
+//             <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
+//               Authentic Indian
+//               <span className="block text-yellow-300 animate-pulse">Namkeen</span>
+//             </h1>
+//           </div>
+//           <p className="text-xl sm:text-2xl lg:text-3xl text-orange-100 mb-10 max-w-3xl mx-auto animate-slideUp font-light">
+//             Made with love, tradition, and the finest ingredients from the heart of India
+//           </p>
+//           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fadeIn">
+//             <button className="bg-white text-orange-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 hover:text-orange-700 transition-all transform hover:scale-110 hover:shadow-2xl shadow-xl">
+//               Order Now 🛒
+//             </button>
+//             <button className="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-orange-600 transition-all transform hover:scale-110 shadow-xl">
+//               View Menu 📋
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Scroll Indicator */}
+//         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+//           <div className="w-8 h-12 border-3 border-white rounded-full flex justify-center p-2">
+//             <div className="w-2 h-3 bg-white rounded-full animate-scroll"></div>
+//           </div>
+//           <p className="text-white text-sm mt-2 font-semibold">Scroll Down</p>
+//         </div>
+//       </section>
+
+//       {/* Features Bar */}
+//       <section className="py-16 bg-gradient-to-r from-orange-700 to-red-700 relative overflow-hidden">
+//         <div className="absolute inset-0 opacity-10"
+//              style={{ 
+//                backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, white 35px, white 70px)',
+//                transform: `translateX(${scrollY * 0.1}px)`
+//              }}>
+//         </div>
+//         <div className="max-w-7xl mx-auto px-4 relative z-10">
+//           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+//             {features.map((feature, index) => (
+//               <div 
+//                 key={index}
+//                 className="text-center text-white transform hover:scale-110 transition-all duration-300"
+//                 style={{
+//                   animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+//                 }}>
+//                 <div className="flex justify-center mb-3 animate-bounce-slow">
+//                   {feature.icon}
+//                 </div>
+//                 <h3 className="text-2xl font-bold mb-1">{feature.title}</h3>
+//                 <p className="text-orange-200">{feature.desc}</p>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Products Section with Enhanced Animations */}
+//       <section id="products" className="py-24 px-4 relative overflow-hidden">
+//         <div className="absolute top-20 right-0 text-9xl opacity-5 animate-spin-slow">
+//           🥔
+//         </div>
+//         <div className="absolute bottom-20 left-0 text-9xl opacity-5 animate-bounce-slow">
+//           🌶️
+//         </div>
+
+//         <div className="max-w-7xl mx-auto relative z-10">
+//           <div className="text-center mb-16 animate-fadeIn">
+//             <h2 className="text-5xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600 mb-4">
+//               Our Delicious Range
+//             </h2>
+//             <p className="text-xl text-orange-700 max-w-2xl mx-auto">
+//               Handcrafted with authentic recipes passed down through generations
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+//             {products.map((product, index) => (
+//               <div 
+//                 key={index} 
+//                 className="group bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 hover:-rotate-1 transition-all duration-500 hover:shadow-2xl"
+//                 style={{
+//                   animation: `fadeInUp 0.6s ease-out ${index * 0.15}s both`
+//                 }}>
+//                 <div className="relative h-56 overflow-hidden bg-gradient-to-br from-orange-400 to-red-500">
+//                   <img 
+//                     src={product.image} 
+//                     alt={product.name}
+//                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+//                   <div className="absolute top-4 right-4 bg-yellow-400 text-orange-900 px-3 py-1 rounded-full font-bold text-sm animate-pulse">
+//                     Fresh!
+//                   </div>
+//                 </div>
+//                 <div className="p-6">
+//                   <h3 className="text-2xl font-bold text-orange-900 mb-2 group-hover:text-orange-600 transition-colors">
+//                     {product.name}
+//                   </h3>
+//                   <p className="text-gray-600 mb-3">{product.desc}</p>
+//                   <div className="flex items-center mb-4">
+//                     {[...Array(5)].map((_, i) => (
+//                       <Star 
+//                         key={i} 
+//                         className={`w-5 h-5 transition-all duration-300 ${
+//                           i < Math.floor(product.rating) 
+//                             ? 'text-yellow-500 fill-yellow-500 animate-pulse' 
+//                             : 'text-gray-300'
+//                         }`} 
+//                       />
+//                     ))}
+//                     <span className="ml-2 text-orange-700 font-semibold">{product.rating}</span>
+//                   </div>
+//                   <div className="flex justify-between items-center">
+//                     <span className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-600 text-transparent bg-clip-text">
+//                       {product.price}
+//                     </span>
+//                     <button className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full hover:from-orange-700 hover:to-red-700 transition-all transform hover:scale-110 shadow-lg font-semibold">
+//                       Add to Cart
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* About Section with Image */}
+//       <section id="about" className="py-24 px-4 bg-gradient-to-br from-orange-100 via-amber-100 to-yellow-100 relative overflow-hidden">
+//         <div className="absolute right-0 top-20 text-9xl opacity-10 animate-spin-slow">
+//           🌾
+//         </div>
+//         <div className="absolute left-0 bottom-20 text-9xl opacity-10 animate-bounce-slow">
+//           👨‍🍳
+//         </div>
+
+//         <div className="max-w-7xl mx-auto relative z-10">
+//           <div className="grid md:grid-cols-2 gap-12 items-center">
+//             <div className="space-y-6 animate-slideRight">
+//               <h2 className="text-5xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600">
+//                 Our Heritage Story
+//               </h2>
+//               <p className="text-lg text-gray-700 leading-relaxed">
+//                 For over <span className="font-bold text-orange-600">50 years</span>, we've been crafting the finest namkeen using traditional recipes and the highest quality ingredients. Every bite tells a story of our heritage and dedication to authentic taste.
+//               </p>
+//               <p className="text-lg text-gray-700 leading-relaxed">
+//                 From our family to yours, we bring you the authentic flavors of India, made with love and care in every batch. Our secret? Time-tested recipes and uncompromising quality standards.
+//               </p>
+//               <div className="flex flex-wrap gap-4 pt-4">
+//                 <div className="bg-white px-6 py-3 rounded-full shadow-lg">
+//                   <span className="font-bold text-orange-600">50+</span> Years Experience
+//                 </div>
+//                 <div className="bg-white px-6 py-3 rounded-full shadow-lg">
+//                   <span className="font-bold text-orange-600">100%</span> Natural
+//                 </div>
+//                 <div className="bg-white px-6 py-3 rounded-full shadow-lg">
+//                   <span className="font-bold text-orange-600">10K+</span> Happy Customers
+//                 </div>
+//               </div>
+//               <button className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-full font-bold hover:from-orange-700 hover:to-red-700 transition-all transform hover:scale-110 shadow-xl mt-6">
+//                 Discover Our Journey →
+//               </button>
+//             </div>
+            
+//             <div className="relative animate-slideLeft">
+//               <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500">
+//                 <img 
+//                   src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=800&fit=crop" 
+//                   alt="Traditional Indian Snacks"
+//                   className="w-full h-full object-cover"
+//                 />
+//                 <div className="absolute inset-0 bg-gradient-to-t from-orange-900/70 via-transparent to-transparent"></div>
+//                 <div className="absolute bottom-8 left-8 right-8 text-white">
+//                   <h3 className="text-3xl font-bold mb-2">Handcrafted Excellence</h3>
+//                   <p className="text-orange-200">Every product made with passion and precision</p>
+//                 </div>
+//               </div>
+//               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full animate-pulse opacity-50"></div>
+//               <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-red-400 to-pink-500 rounded-full animate-bounce-slow opacity-50"></div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Contact Page Section */}
+//       <section id="contact" className="py-24 px-4 bg-gradient-to-br from-orange-900 via-red-900 to-orange-800 text-white relative overflow-hidden">
+//         <div className="absolute left-10 top-10 text-9xl opacity-10 animate-float">
+//           📞
+//         </div>
+//         <div className="absolute right-10 bottom-10 text-9xl opacity-10 animate-float-delayed">
+//           ✉️
+//         </div>
+
+//         <div className="max-w-7xl mx-auto relative z-10">
+//           <div className="text-center mb-16 animate-fadeIn">
+//             <h2 className="text-5xl sm:text-6xl font-bold mb-4">Get In Touch</h2>
+//             <p className="text-xl text-orange-200">We'd love to hear from you! Reach out anytime.</p>
+//           </div>
+          
+//           <div className="grid md:grid-cols-2 gap-12 mb-16">
+//             {/* Contact Info Cards */}
+//             <div className="space-y-6 animate-slideRight">
+//               <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+//                 <Phone className="w-12 h-12 mb-4 animate-bounce-slow" />
+//                 <h3 className="text-2xl font-bold mb-2">Call Us</h3>
+//                 <p className="text-orange-200 text-lg">+91 98765 43210</p>
+//                 <p className="text-orange-200 text-sm mt-2">Mon-Sat, 9 AM - 8 PM IST</p>
+//               </div>
+              
+//               <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+//                 <Mail className="w-12 h-12 mb-4 animate-bounce-slow" />
+//                 <h3 className="text-2xl font-bold mb-2">Email Us</h3>
+//                 <p className="text-orange-200 text-lg">order@desinamkeen.com</p>
+//                 <p className="text-orange-200 text-sm mt-2">We'll respond within 24 hours</p>
+//               </div>
+              
+//               <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 border border-white/20">
+//                 <MapPin className="w-12 h-12 mb-4 animate-bounce-slow" />
+//                 <h3 className="text-2xl font-bold mb-2">Visit Us</h3>
+//                 <p className="text-orange-200 text-lg">123 Namkeen Street</p>
+//                 <p className="text-orange-200 text-lg">Jaipur, Rajasthan 302001</p>
+//               </div>
+//             </div>
+
+//             {/* Contact Form */}
+//             <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/20 animate-slideLeft">
+//               <h3 className="text-3xl font-bold mb-6">Send us a Message</h3>
+//               <form className="space-y-4" onSubmit={(e) => {
+//                 e.preventDefault();
+//                 const name = e.target.name.value;
+//                 const email = e.target.email.value;
+//                 const phone = e.target.phone.value;
+//                 const message = e.target.message.value;
+                
+//                 const whatsappMessage = `*New Message from Website*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Message:* ${encodeURIComponent(message)}`;
+                
+//                 window.open(`https://wa.me/919664007889?text=${whatsappMessage}`, '_blank');
+//               }}>
+//                 <div>
+//                   <input 
+//                     type="text" 
+//                     name="name"
+//                     placeholder="Your Name" 
+//                     required
+//                     className="w-full px-6 py-4 rounded-full bg-white/20 border border-white/30 text-white placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+//                   />
+//                 </div>
+//                 <div>
+//                   <input 
+//                     type="email" 
+//                     name="email"
+//                     placeholder="Your Email" 
+//                     required
+//                     className="w-full px-6 py-4 rounded-full bg-white/20 border border-white/30 text-white placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+//                   />
+//                 </div>
+//                 <div>
+//                   <input 
+//                     type="tel" 
+//                     name="phone"
+//                     placeholder="Phone Number" 
+//                     required
+//                     className="w-full px-6 py-4 rounded-full bg-white/20 border border-white/30 text-white placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+//                   />
+//                 </div>
+//                 <div>
+//                   <textarea 
+//                     rows="4" 
+//                     name="message"
+//                     placeholder="Your Message" 
+//                     required
+//                     className="w-full px-6 py-4 rounded-3xl bg-white/20 border border-white/30 text-white placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all resize-none"
+//                   ></textarea>
+//                 </div>
+//                 <button 
+//                   type="submit" 
+//                   className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-orange-900 py-4 rounded-full font-bold text-lg hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-105 shadow-xl flex items-center justify-center gap-2"
+//                 >
+//                   Send Message <Send className="w-5 h-5" />
+//                 </button>
+//               </form>
+//             </div>
+//           </div>
+
+//           {/* Map or Additional Info */}
+//           <div className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/20 text-center animate-fadeIn">
+//             <h3 className="text-3xl font-bold mb-4">Visit Our Store</h3>
+//             <p className="text-orange-200 text-lg mb-6">
+//               Experience the aroma and taste of fresh namkeen at our flagship store in Jaipur
+//             </p>
+//             <div className="bg-white/20 h-64 rounded-2xl flex items-center justify-center">
+//               <div className="text-center">
+//                 <MapPin className="w-16 h-16 mx-auto mb-4 animate-bounce" />
+//                 <p className="text-2xl font-bold">Jaipur, Rajasthan</p>
+//                 <p className="text-orange-200">123 Namkeen Street, Pink City</p>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Footer */}
+//       <footer className="bg-gradient-to-r from-orange-950 to-red-950 text-orange-200 py-12 px-4">
+//         <div className="max-w-7xl mx-auto">
+//           <div className="grid md:grid-cols-4 gap-8 mb-8">
+//             <div>
+//               <div className="flex items-center space-x-2 mb-4">
+//                 <span className="text-4xl">🥨</span>
+//                 <h3 className="text-2xl font-bold text-white">Desi Namkeen</h3>
+//               </div>
+//               <p className="text-orange-300">Authentic Indian snacks made with love and tradition since 1970.</p>
+//             </div>
+//             <div>
+//               <h4 className="text-xl font-bold text-white mb-4">Quick Links</h4>
+//               <ul className="space-y-2">
+//                 <li><a href="#home" className="hover:text-yellow-300 transition-colors">Home</a></li>
+//                 <li><a href="#products" className="hover:text-yellow-300 transition-colors">Products</a></li>
+//                 <li><a href="#about" className="hover:text-yellow-300 transition-colors">About</a></li>
+//                 <li><a href="#contact" className="hover:text-yellow-300 transition-colors">Contact</a></li>
+//               </ul>
+//             </div>
+//             <div>
+//               <h4 className="text-xl font-bold text-white mb-4">Products</h4>
+//               <ul className="space-y-2">
+//                 <li><a href="#" className="hover:text-yellow-300 transition-colors">Namkeen</a></li>
+//                 <li><a href="#" className="hover:text-yellow-300 transition-colors">Snacks</a></li>
+//                 <li><a href="#" className="hover:text-yellow-300 transition-colors">Gift Boxes</a></li>
+//                 <li><a href="#" className="hover:text-yellow-300 transition-colors">Combo Packs</a></li>
+//               </ul>
+//             </div>
+//             <div>
+//               <h4 className="text-xl font-bold text-white mb-4">Follow Us</h4>
+//               <div className="flex space-x-4">
+//                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 cursor-pointer transition-all transform hover:scale-110">
+//                   📘
+//                 </div>
+//                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 cursor-pointer transition-all transform hover:scale-110">
+//                   📷
+//                 </div>
+//                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 cursor-pointer transition-all transform hover:scale-110">
+//                   🐦
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="border-t border-orange-800 pt-8 text-center">
+//             <p className="text-lg">© 2024 Desi Namkeen. Made with ❤️ in Jaipur, India</p>
+//             <p className="text-sm text-orange-300 mt-2">All Rights Reserved</p>
+//           </div>
+//         </div>
+//       </footer>
+
+//       <style jsx>{`
+//         @keyframes fadeIn {
+//           from { opacity: 0; }
+//           to { opacity: 1; }
+//         }
+        
+//         @keyframes fadeInUp {
+//           from {
+//             opacity: 0;
+//             transform: translateY(30px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateY(0);
+//           }
+//         }
+        
+//         @keyframes slideDown {
+//           from {
+//             opacity: 0;
+//             transform: translateY(-30px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateY(0);
+//           }
+//         }
+        
+//         @keyframes slideUp {
+//           from {
+//             opacity: 0;
+//             transform: translateY(30px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateY(0);
+//           }
+//         }
+        
+//         @keyframes slideRight {
+//           from {
+//             opacity: 0;
+//             transform: translateX(-50px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateX(0);
+//           }
+//         }
+        
+//         @keyframes slideLeft {
+//           from {
+//             opacity: 0;
+//             transform: translateX(50px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateX(0);
+//           }
+//         }
+        
+//         @keyframes float {
+//           0%, 100% { transform: translateY(0px); }
+//           50% { transform: translateY(-20px); }
+//         }
+        
+//         @keyframes float-delayed {
+//           0%, 100% { transform: translateY(0px); }
+//           50% { transform: translateY(-15px); }
+//         }
+        
+//         @keyframes bounce-slow {
+//           0%, 100% { transform: translateY(0); }
+//           50% { transform: translateY(-10px); }
+//         }
+        
+//         @keyframes spin-slow {
+//           from { transform: rotate(0deg); }
+//           to { transform: rotate(360deg); }
+//         }
+        
+//         @keyframes scroll {
+//           0% { transform: translateY(0); opacity: 0; }
+//           40% { opacity: 1; }
+//           80% { transform: translateY(20px); opacity: 0; }
+//           100% { opacity: 0; }
+//         }
+        
+//         .animate-fadeIn {
+//           animation: fadeIn 1s ease-out;
+//         }
+        
+//         .animate-fadeInUp {
+//           animation: fadeInUp 0.6s ease-out;
+//         }
+        
+//         .animate-slideDown {
+//           animation: slideDown 0.8s ease-out;
+//         }
+        
+//         .animate-slideUp {
+//           animation: slideUp 0.8s ease-out 0.2s both;
+//         }
+        
+//         .animate-slideRight {
+//           animation: slideRight 0.8s ease-out;
+//         }
+        
+//         .animate-slideLeft {
+//           animation: slideLeft 0.8s ease-out;
+//         }
+        
+//         .animate-float {
+//           animation: float 3s ease-in-out infinite;
+//         }
+        
+//         .animate-float-delayed {
+//           animation: float-delayed 4s ease-in-out infinite;
+//         }
+        
+//         .animate-bounce-slow {
+//           animation: bounce-slow 2s ease-in-out infinite;
+//         }
+        
+//         .animate-spin-slow {
+//           animation: spin-slow 20s linear infinite;
+//         }
+        
+//         .animate-scroll {
+//           animation: scroll 2s ease-in-out infinite;
+//         }
+//       `}</style>
+//     </div>
+//   );
+// };
+
+// export default NamkeenWebsite;
+
+
+// import React, { useEffect, useRef, useState } from 'react';
+// import { Menu, X, Phone, Mail, MapPin, Heart, Shield, Users, Award, ChevronRight, Activity } from 'lucide-react';
+
+// const MedicalWebsite = () => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [activeSection, setActiveSection] = useState('home');
+//   const horizontalSectionRef = useRef(null);
+//   const horizontalContainerRef = useRef(null);
+//   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+//   useEffect(() => {
+//     const sections = document.querySelectorAll('section[id]');
+    
+//     const observer = new IntersectionObserver((entries) => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           setActiveSection(entry.target.id);
+//         }
+//       });
+//     }, { threshold: 0.3 });
+
+//     sections.forEach(section => observer.observe(section));
+
+//     // GSAP-like horizontal scroll implementation
+//     const horizontalSection = horizontalSectionRef.current;
+//     const horizontalContainer = horizontalContainerRef.current;
+
+//     if (horizontalSection && horizontalContainer && window.innerWidth >= 768) {
+//       const scrollWidth = horizontalContainer.scrollWidth;
+//       const viewportWidth = window.innerWidth;
+//       const scrollDistance = scrollWidth - viewportWidth;
+
+//       let ticking = false;
+      
+//       const handleScroll = () => {
+//         if (!ticking) {
+//           window.requestAnimationFrame(() => {
+//             const sectionTop = horizontalSection.offsetTop;
+//             const sectionHeight = horizontalSection.offsetHeight;
+//             const scrollY = window.scrollY;
+            
+//             if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
+//               const progress = (scrollY - sectionTop) / sectionHeight;
+//               const translateX = -progress * scrollDistance;
+//               horizontalContainer.style.transform = `translateX(${translateX}px)`;
+//             }
+            
+//             ticking = false;
+//           });
+//           ticking = true;
+//         }
+//       };
+
+//       window.addEventListener('scroll', handleScroll, { passive: true });
+      
+//       return () => {
+//         window.removeEventListener('scroll', handleScroll);
+//         sections.forEach(section => observer.unobserve(section));
+//       };
+//     }
+
+//     return () => sections.forEach(section => observer.unobserve(section));
+//   }, []);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     alert('Thank you! Your message has been sent.');
+//     setFormData({ name: '', email: '', message: '' });
+//   };
+
+//   const services = [
+//     { icon: Heart, title: 'Cardiology', desc: 'Expert heart care and cardiovascular treatment' },
+//     { icon: Activity, title: 'Emergency Care', desc: '24/7 emergency medical services' },
+//     { icon: Shield, title: 'Preventive Care', desc: 'Comprehensive health screenings' },
+//     { icon: Users, title: 'Family Medicine', desc: 'Complete family healthcare solutions' }
+//   ];
+
+//   const medicines = [
+//     { name: 'Pain Relief', img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=300&fit=crop', price: '$12.99', desc: 'Fast-acting relief' },
+//     { name: 'Vitamins', img: 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400&h=300&fit=crop', price: '$24.99', desc: 'Daily essentials' },
+//     { name: 'Antibiotics', img: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&h=300&fit=crop', price: '$18.99', desc: 'Prescription strength' },
+//     { name: 'Supplements', img: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=300&fit=crop', price: '$29.99', desc: 'Health boosters' },
+//     { name: 'First Aid', img: 'https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=400&h=300&fit=crop', price: '$15.99', desc: 'Emergency kit' },
+//     { name: 'Skincare', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop', price: '$34.99', desc: 'Dermatologist approved' },
+//     { name: 'Allergy Relief', img: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=300&fit=crop', price: '$16.99', desc: 'Seasonal support' },
+//     { name: 'Wellness Pack', img: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&h=300&fit=crop', price: '$45.99', desc: 'Complete care' }
+//   ];
+
+//   return (
+//     <div className="bg-gradient-to-br from-slate-50 to-blue-50">
+//       {/* Navigation */}
+//       <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+//           <div className="flex items-center gap-2 group cursor-pointer">
+//             <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+//               <Heart className="text-white" size={24} />
+//             </div>
+//             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+//               MediCare
+//             </span>
+//           </div>
+
+//           {/* Desktop Menu */}
+//           <div className="hidden md:flex gap-6 lg:gap-8">
+//             {['home', 'services', 'products', 'contact'].map(item => (
+//               <a
+//                 key={item}
+//                 href={`#${item}`}
+//                 className={`capitalize font-medium transition-all hover:text-blue-600 relative group ${
+//                   activeSection === item ? 'text-blue-600' : 'text-gray-700'
+//                 }`}
+//               >
+//                 {item}
+//                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+//               </a>
+//             ))}
+//           </div>
+
+//           {/* Mobile Menu Button */}
+//           <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
+//             {menuOpen ? <X size={24} /> : <Menu size={24} />}
+//           </button>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         {menuOpen && (
+//           <div className="md:hidden bg-white border-t animate-fadeIn">
+//             {['home', 'services', 'products', 'contact'].map(item => (
+//               <a
+//                 key={item}
+//                 href={`#${item}`}
+//                 onClick={() => setMenuOpen(false)}
+//                 className="block px-6 py-3 capitalize hover:bg-blue-50 transition-colors"
+//               >
+//                 {item}
+//               </a>
+//             ))}
+//           </div>
+//         )}
+//       </nav>
+
+//       {/* Hero Section */}
+//       <section id="home" className="min-h-screen flex items-center pt-20 px-4 sm:px-6">
+//         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+//           <div className="space-y-6 animate-slideInLeft">
+//             <div className="inline-block px-4 py-2 bg-blue-100 rounded-full text-blue-600 font-semibold text-xs sm:text-sm">
+//               Trusted Healthcare Partner
+//             </div>
+//             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+//               Your Health,
+//               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent"> Our Priority</span>
+//             </h1>
+//             <p className="text-gray-600 text-base sm:text-lg md:text-xl">
+//               Experience world-class medical care with compassionate professionals dedicated to your wellbeing.
+//             </p>
+//             <div className="flex gap-3 sm:gap-4 flex-wrap">
+//               <button className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2 text-sm sm:text-base">
+//                 Book Appointment <ChevronRight size={20} />
+//               </button>
+//               <button className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-all text-sm sm:text-base">
+//                 Learn More
+//               </button>
+//             </div>
+//           </div>
+//           <div className="relative animate-slideInRight">
+//             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl blur-3xl opacity-20"></div>
+//             <img
+//               src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=700&fit=crop"
+//               alt="Healthcare"
+//               className="relative rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 w-full"
+//             />
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Services Section */}
+//       <section id="services" className="min-h-screen flex items-center px-4 sm:px-6 py-20">
+//         <div className="max-w-7xl mx-auto w-full">
+//           <div className="text-center mb-12 md:mb-16 animate-fadeIn">
+//             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
+//             <p className="text-gray-600 text-base sm:text-lg">Comprehensive healthcare solutions for you and your family</p>
+//           </div>
+//           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+//             {services.map((service, i) => (
+//               <div
+//                 key={i}
+//                 className="bg-white p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 group cursor-pointer"
+//               >
+//                 <div className="bg-gradient-to-r from-blue-600 to-cyan-500 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+//                   <service.icon className="text-white" size={28} />
+//                 </div>
+//                 <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+//                 <p className="text-gray-600 text-sm md:text-base">{service.desc}</p>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Horizontal Scroll Products - Desktop */}
+//       <section 
+//         id="products" 
+//         ref={horizontalSectionRef}
+//         className="hidden md:block relative"
+//         style={{ height: '300vh' }}
+//       >
+//         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+//           <div className="w-full">
+//             <div className="max-w-7xl mx-auto px-6 mb-8">
+//               <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+//                 Our Products
+//               </h2>
+//               <p className="text-gray-600 text-lg">Scroll down to explore our medicine collection →</p>
+//             </div>
+//             <div 
+//               ref={horizontalContainerRef}
+//               className="flex gap-6 px-6 transition-transform duration-100 ease-out will-change-transform"
+//             >
+//               {medicines.map((med, i) => (
+//                 <div
+//                   key={i}
+//                   className="min-w-[350px] bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer flex-shrink-0 hover:shadow-2xl transition-all duration-300"
+//                   style={{ 
+//                     animation: `fadeInUp 0.6s ease-out ${i * 0.1}s both`
+//                   }}
+//                 >
+//                   <div className="relative overflow-hidden h-64">
+//                     <img
+//                       src={med.img}
+//                       alt={med.name}
+//                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//                     <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//                       <p className="text-sm font-medium">{med.desc}</p>
+//                     </div>
+//                   </div>
+//                   <div className="p-6">
+//                     <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">{med.name}</h3>
+//                     <div className="flex justify-between items-center">
+//                       <span className="text-2xl font-bold text-blue-600">{med.price}</span>
+//                       <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+//                         Add to Cart
+//                       </button>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Products Grid - Mobile/Tablet */}
+//       <section className="md:hidden py-20 px-4 sm:px-6" id="products-mobile">
+//         <div className="max-w-7xl mx-auto">
+//           <div className="text-center mb-12">
+//             <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+//               Our Products
+//             </h2>
+//             <p className="text-gray-600 text-base sm:text-lg">Quality medicines for your health needs</p>
+//           </div>
+//           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+//             {medicines.map((med, i) => (
+//               <div
+//                 key={i}
+//                 className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-300"
+//               >
+//                 <div className="relative overflow-hidden h-48 sm:h-56">
+//                   <img
+//                     src={med.img}
+//                     alt={med.name}
+//                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+//                   <div className="absolute bottom-3 left-3 text-white">
+//                     <p className="text-sm font-medium">{med.desc}</p>
+//                   </div>
+//                 </div>
+//                 <div className="p-5">
+//                   <h3 className="text-lg font-bold mb-3 group-hover:text-blue-600 transition-colors">{med.name}</h3>
+//                   <div className="flex justify-between items-center">
+//                     <span className="text-xl font-bold text-blue-600">{med.price}</span>
+//                     <button className="px-5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm">
+//                       Add to Cart
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Contact Section */}
+//       <section id="contact" className="min-h-screen flex items-center px-4 sm:px-6 py-20">
+//         <div className="max-w-7xl mx-auto w-full">
+//           <div className="text-center mb-12 md:mb-16">
+//             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+//             <p className="text-gray-600 text-base sm:text-lg">We're here to help you with any questions</p>
+//           </div>
+//           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+//             <div className="space-y-6 md:space-y-8">
+//               <div className="flex items-start gap-4 group cursor-pointer">
+//                 <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+//                   <Phone className="text-white" size={24} />
+//                 </div>
+//                 <div>
+//                   <h3 className="font-bold text-base md:text-lg mb-1">Phone</h3>
+//                   <p className="text-gray-600 text-sm md:text-base">+1 (555) 123-4567</p>
+//                 </div>
+//               </div>
+//               <div className="flex items-start gap-4 group cursor-pointer">
+//                 <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+//                   <Mail className="text-white" size={24} />
+//                 </div>
+//                 <div>
+//                   <h3 className="font-bold text-base md:text-lg mb-1">Email</h3>
+//                   <p className="text-gray-600 text-sm md:text-base break-all">contact@medicare.com</p>
+//                 </div>
+//               </div>
+//               <div className="flex items-start gap-4 group cursor-pointer">
+//                 <div className="bg-gradient-to-r from-blue-600 to-cyan-500 p-3 rounded-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+//                   <MapPin className="text-white" size={24} />
+//                 </div>
+//                 <div>
+//                   <h3 className="font-bold text-base md:text-lg mb-1">Address</h3>
+//                   <p className="text-gray-600 text-sm md:text-base">123 Healthcare Ave, Medical District, NY 10001</p>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+//               <div className="space-y-6">
+//                 <div>
+//                   <label className="block text-sm font-semibold mb-2">Name</label>
+//                   <input
+//                     type="text"
+//                     value={formData.name}
+//                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+//                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-600 focus:outline-none transition-colors"
+//                     placeholder="Your name"
+//                   />
+//                 </div>
+//                 <div>
+//                   <label className="block text-sm font-semibold mb-2">Email</label>
+//                   <input
+//                     type="email"
+//                     value={formData.email}
+//                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+//                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-600 focus:outline-none transition-colors"
+//                     placeholder="your@email.com"
+//                   />
+//                 </div>
+//                 <div>
+//                   <label className="block text-sm font-semibold mb-2">Message</label>
+//                   <textarea
+//                     value={formData.message}
+//                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+//                     rows="4"
+//                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-600 focus:outline-none transition-colors resize-none"
+//                     placeholder="Your message..."
+//                   ></textarea>
+//                 </div>
+//                 <button
+//                   onClick={handleSubmit}
+//                   className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+//                 >
+//                   Send Message
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Footer */}
+//       <footer className="bg-gradient-to-r from-slate-900 to-blue-900 text-white py-12 px-4 sm:px-6">
+//         <div className="max-w-7xl mx-auto text-center">
+//           <div className="flex justify-center items-center gap-2 mb-4">
+//             <Heart size={32} />
+//             <span className="text-2xl font-bold">MediCare</span>
+//           </div>
+//           <p className="text-gray-300 mb-6">Your trusted healthcare partner</p>
+//           <p className="text-gray-400 text-sm">© 2024 MediCare. All rights reserved.</p>
+//         </div>
+//       </footer>
+
+//       <style>{`
+//         @keyframes fadeIn {
+//           from { opacity: 0; }
+//           to { opacity: 1; }
+//         }
+//         @keyframes slideInLeft {
+//           from { opacity: 0; transform: translateX(-50px); }
+//           to { opacity: 1; transform: translateX(0); }
+//         }
+//         @keyframes slideInRight {
+//           from { opacity: 0; transform: translateX(50px); }
+//           to { opacity: 1; transform: translateX(0); }
+//         }
+//         @keyframes fadeInUp {
+//           from { 
+//             opacity: 0; 
+//             transform: translateY(30px);
+//           }
+//           to { 
+//             opacity: 1; 
+//             transform: translateY(0);
+//           }
+//         }
+//         .animate-fadeIn {
+//           animation: fadeIn 0.6s ease-out;
+//         }
+//         .animate-slideInLeft {
+//           animation: slideInLeft 0.8s ease-out;
+//         }
+//         .animate-slideInRight {
+//           animation: slideInRight 0.8s ease-out;
+//         }
+//         html {
+//           scroll-behavior: smooth;
+//         }
+//       `}</style>
+//     </div>
+//   );
+// };
+
+// export default MedicalWebsite;
+
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  Brain,
+  Stethoscope,
+  HeartPulse,
+  Syringe,
+  PhoneCall,
+  Mail,
+  MapPin,
+} from "lucide-react";
+import "./MedicalWebsite.css";
+
+const services = [
+  {
+    icon: Activity,
+    title: "General Medicine",
+    description:
+      "Comprehensive primary care and internal medicine services for all age groups.",
+  },
+  {
+    icon: Brain,
+    title: "Neurology",
+    description:
+      "Advanced diagnosis and treatment of neurological disorders and diseases.",
+  },
+  {
+    icon: Stethoscope,
+    title: "Diagnostic Center",
+    description:
+      "State-of-the-art diagnostic tools including MRI, CT scans, and lab tests.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Cardiology",
+    description:
+      "Specialized cardiac care including ECG, angiography, and heart checkups.",
+  },
+  {
+    icon: Syringe,
+    title: "Vaccination",
+    description:
+      "Immunization services for adults, children, travelers, and corporate needs.",
+  },
+];
+
+const MedicalWebsite = () => {
+  const horizontalRef = useRef(null);
+  const [activeSection, setActiveSection] = useState("home");
+
+  // Smooth horizontal scroll sync with vertical scrolling
+  useEffect(() => {
+    const section = horizontalRef.current;
+    if (!section) return;
+
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+        document.body.style.overflowX = "hidden";
+
+        const scrollProgress =
+          ((0 - rect.top) / (section.scrollWidth - rect.width)) *
+          section.scrollWidth;
+
+        section.scrollLeft = scrollProgress;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Highlight active navbar link
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+
+    return () => {
+      sections.forEach((s) => observer.unobserve(s));
+    };
+  }, []);
+
+  return (
+    <div className="w-full bg-gray-50 text-gray-900">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-4 px-8 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-blue-600">Medicare+</h1>
+
+        <ul className="hidden md:flex gap-8 font-medium">
+          {["home", "about", "specialties", "whyus", "services", "contact"].map(
+            (item) => (
+              <li key={item}>
+                <a
+                  href={`#${item}`}
+                  className={`hover:text-blue-600 transition ${
+                    activeSection === item ? "text-blue-600 font-bold" : ""
+                  }`}
+                >
+                  {item.toUpperCase()}
+                </a>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="h-screen flex items-center justify-center px-8 pt-20 bg-gradient-to-r from-blue-100 to-blue-50"
+      >
+        <div className="text-center animate-fadeIn">
+          <h2 className="text-5xl font-bold text-blue-700">
+            Your Health, Our Priority
+          </h2>
+          <p className="text-lg mt-4 text-gray-600">
+            Experience world-class medical care with advanced technology.
+          </p>
+          <a
+            href="#contact"
+            className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+          >
+            Book Appointment
+          </a>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-8 bg-white">
+        <div className="max-w-5xl mx-auto text-center animate-fadeInUp">
+          <h2 className="text-4xl font-bold text-blue-600">About Us</h2>
+          <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+            Medicare+ is a trusted healthcare provider offering quality medical
+            services, diagnostics, specialists, and emergency support for all
+            age groups.
+          </p>
+        </div>
+      </section>
+
+      {/* Specialties */}
+      <section id="specialties" className="py-20 px-8 bg-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-blue-600 text-center">
+            Our Specialties
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-10 mt-12">
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition animate-slideInUp"
+              >
+                <service.icon className="w-12 h-12 text-blue-600 mb-4" />
+                <h3 className="text-xl font-semibold">{service.title}</h3>
+                <p className="text-gray-600 mt-2">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section id="whyus" className="py-20 px-8 bg-white">
+        <div className="max-w-6xl mx-auto text-center animate-fadeInUp">
+          <h2 className="text-4xl font-bold text-blue-600">Why Choose Us?</h2>
+
+          <div className="grid md:grid-cols-3 gap-10 mt-12">
+            {[
+              "Experienced Doctors",
+              "24/7 Emergency Care",
+              "Advanced Technology",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 bg-gray-100 rounded-xl shadow hover:shadow-lg transition"
+              >
+                <h3 className="text-xl font-semibold">{item}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Horizontal Scroll Section */}
+      <section
+        id="services"
+        className="relative h-screen bg-blue-50 flex items-center"
+      >
+        <div
+          ref={horizontalRef}
+          className="flex overflow-x-auto snap-x snap-mandatory w-full h-full px-10 gap-10"
+        >
+          {services.map((service, i) => (
+            <div
+              key={i}
+              className="min-w-[70%] bg-white p-10 rounded-xl shadow-xl snap-center"
+            >
+              <service.icon className="w-14 h-14 text-blue-600" />
+              <h3 className="text-3xl font-bold mt-4">{service.title}</h3>
+              <p className="text-gray-600 mt-2">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-bold text-blue-600 text-center">
+            Contact Us
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-10 mt-12">
+            {/* Contact Form */}
+            <form className="space-y-6 w-full">
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="w-full px-4 py-3 border rounded-lg"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="w-full px-4 py-3 border rounded-lg"
+                required
+              />
+              <textarea
+                placeholder="Your Message"
+                rows="5"
+                className="w-full px-4 py-3 border rounded-lg"
+                required
+              ></textarea>
+
+              <button className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Send Message
+              </button>
+            </form>
+
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <PhoneCall className="w-8 h-8 text-blue-600" />
+                <p>+91 98765 43210</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Mail className="w-8 h-8 text-blue-600" />
+                <p>support@medicare.com</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <MapPin className="w-8 h-8 text-blue-600" />
+                <p>New Delhi, India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default MedicalWebsite;

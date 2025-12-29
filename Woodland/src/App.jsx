@@ -3,20 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
-import Home from "./page/Home";
+import Home from "./page/Home"; // ✅ FIXED PATH
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className="relative min-h-screen flex flex-col z-10">
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      <Footer />
     </Router>
   );
 };
